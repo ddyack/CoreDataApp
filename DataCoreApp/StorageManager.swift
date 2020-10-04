@@ -13,7 +13,7 @@ class StorageManager {
     
     private init() {}
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "DataCoreApp")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -30,7 +30,6 @@ class StorageManager {
     }
     
     func saveContext() {
-        let context = self.context
         if context.hasChanges {
             do {
                 try context.save()
@@ -50,7 +49,7 @@ class StorageManager {
     }
     
     func deleteTaskWithContext(task: NSManagedObject) {
-        persistentContainer.viewContext.delete(task)
+        context.delete(task)
         saveContext()
     }
     
@@ -58,7 +57,7 @@ class StorageManager {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Task.fetchRequest()
         
         do {
-            let tasks = try self.context.fetch(fetchRequest) as? [NSManagedObject]
+            let tasks = try context.fetch(fetchRequest) as? [NSManagedObject]
             
             if tasks?.count != 0 {
                 tasks?[indexPath].setValue(editValue, forKey: "name")

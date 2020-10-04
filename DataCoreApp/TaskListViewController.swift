@@ -92,12 +92,10 @@ class TaskListViewController: UITableViewController {
             alert.addAction(saveAction)
         }
         
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
-        
     }
     
     private func save(_ taskName: String) {
@@ -143,7 +141,12 @@ extension TaskListViewController {
                 self.editTask(indexPath: indexPath.row)
             })
         ])
-        
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
 }
 
