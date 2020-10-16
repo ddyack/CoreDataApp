@@ -1,4 +1,4 @@
-# DataCoreApp
+# CoreDataApp
 
 ## Simple To Do list with using CoreData
 
